@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python3 main.py
+    ports:
+      - 8010:5000
+    volumes:
+      - .:/code
+    
