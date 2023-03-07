@@ -16,6 +16,6 @@ COPY main.py main.py
 COPY config.py config.py
 COPY docker-compose.yml docker-compose.yml
 COPY Dockerfile Dockerfile
-COPY requirements.txt requirements.txt
+COPY Requirements.txt Requirements.txt
 
 RUN pip3 install -r requirements.txt
