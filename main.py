@@ -16,7 +16,15 @@ rdb = redis.Redis(host='redis', port=6379, db=0)
 @dp.message_handler(commands=['start'])
 async def start_func(message: types.Message):
     print('Bot has started!')
-    await message.reply('Welcom to Chat_bot. This bot uses ChatGPT!')
+    await message.reply('Welcome to Chat_bot. This bot uses ChatGPT!\n\nTo clear cache use command /del.')
+
+@dp.message_handler(commands=['del'])
+async def clear_cache(message: types.Message):
+    user_id = types.User.get_current().id
+    rdb.delete(user_id)
+    rdb.close()
+    await message.reply('Chache was cleared!')
+    
 
 
 @dp.message_handler()
@@ -32,7 +40,7 @@ async def get_message(message: types.Message)->None:
     chat_history = db_message + '\n\nHuman: ' + message.text + '\n\nAI:'
 
     if len(chat_history) > 2000:        
-        chat_history = chat_history[1000:]
+        chat_history = chat_history[-2000:]
     print('CHAT LENGTH: ', len(chat_history))
 
     response = openai.Completion.create(
@@ -56,6 +64,7 @@ async def get_message(message: types.Message)->None:
     print('RDB: ', rdb.get(user_id))
 
     rdb.close()
+
 
 
 if __name__ == '__main__':
