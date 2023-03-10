@@ -70,7 +70,7 @@ async def get_message(message: types.Message)->None:
 
     chat_history = chat_history + answer
     print('CHAT_HISTORY: ',  chat_history)
-    rdb.set(user_id, str(chat_history))
+    rdb.set(user_id, str(chat_history), ex=300)
     print('RDB: ', rdb.get(user_id))
 
     rdb.close()
