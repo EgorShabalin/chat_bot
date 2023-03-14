@@ -51,15 +51,7 @@ async def get_message(message: types.Message)->None:
         messages = [{'role': 'user', 
                      'content': chat_history}],        
         temperature = 1,)
-        #prompt=chat_history,
-        #temperature=0.9,
-        #max_tokens=1000,
-        #top_p=1.0,
-        #frequency_penalty=0.0,
-        #presence_penalty=0.0,
-        #stop=[" Human:", " AI:"])
-
-    #answer = response['choices'][0]['text']
+        
     answer = response['choices'][0]['message']['content']
     await message.reply(f'<code>{answer}</code>', 
                         parse_mode='html')
