@@ -52,7 +52,7 @@ async def get_message(message: types.Message) -> None:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": chat_history}],
-            temperature=1,
+            temperature=1.5,
         )
         answer = response["choices"][0]["message"]["content"]
         await message.reply(f"<code>{answer}</code>", parse_mode="html")
