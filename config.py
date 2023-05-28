@@ -2,7 +2,7 @@ import os
 import dotenv
 
 
-dotenv.load_dotenv()
+dotenv.load_dotenv("etc/secrets/.env")
 
 TG_KEY = os.environ["TG_KEY"]
 
